@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إتمام الطلب | متجر ريتال</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{ --ol:#6b7c4a; --cr2:#faf7ef; --dk:#2a2a1e; --tx:#5a5a40; --wh:#fff; --bd:rgba(107,124,74,.18); --gr:#25d366; --shadow:0 8px 30px rgba(42,42,30,.06); }
+body { font-family: 'Tajawal', sans-serif; background: var(--cr2); color: var(--dk); line-height: 1.6; padding-bottom: 50px; }
+
+header { background: var(--wh); padding: 20px 5%; border-bottom: 1px solid var(--bd); display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+.brand { font-size: 24px; font-weight: 900; color: var(--ol); text-decoration: none; font-family: 'Tajawal', sans-serif;}
+.back-link { font-size: 15px; font-weight: 700; color: var(--tx); text-decoration: none; }
+
+.checkout-wrapper { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; padding: 0 5%; }
+
+.form-section { background: var(--wh); border-radius: 24px; padding: 40px; box-shadow: var(--shadow); border: 1px solid var(--bd); }
+.section-title { font-size: 22px; font-weight: 800; color: var(--dk); margin-bottom: 30px; border-bottom: 2px solid var(--bd); padding-bottom: 15px; display: flex; justify-content: space-between; align-items: center;}
+.user-greeting { font-size: 14px; color: var(--ol); font-weight: 700; display: none; background: rgba(107,124,74,.1); padding: 5px 15px; border-radius: 20px;}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+.form-group { display: flex; flex-direction: column; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label { font-size: 14px; font-weight: 700; color: var(--tx); margin-bottom: 8px; }
+.form-group input, .form-group textarea, .form-group select { padding: 16px; border: 1px solid #ddd; border-radius: 12px; font-family: 'Tajawal', sans-serif; font-size: 15px; background: #fdfdfd; transition: all 0.3s; }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--ol); outline: none; box-shadow: 0 0 0 4px rgba(107,124,74,.1); background: var(--wh); }
+
+.account-check { display: flex; align-items: center; gap: 10px; margin-top: 20px; padding: 15px; background: var(--cr2); border-radius: 12px; border: 1px dashed var(--bd); }
+.account-check label { font-weight: 700; color: var(--ol); cursor: pointer; font-size: 14px;}
+.account-check input { width: 18px; height: 18px; accent-color: var(--ol); cursor: pointer; }
+
+.summary-section { background: var(--wh); border-radius: 24px; padding: 40px; box-shadow: var(--shadow); border: 1px solid var(--bd); height: fit-content; }
+.product-item { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px dashed var(--bd); }
+.product-img { width: 70px; height: 70px; border-radius: 12px; object-fit: cover; border: 1px solid var(--bd); }
+.product-details h4 { font-size: 16px; font-weight: 800; color: var(--dk); margin-bottom: 5px;}
+.product-details p { font-size: 14px; color: var(--tx); font-weight: 500; }
+
+.coupon-box { display: flex; gap: 10px; margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px dashed var(--bd); }
+.coupon-box input { flex: 1; padding: 12px; border: 1px solid var(--bd); border-radius: 10px; font-family: 'Tajawal'; outline: none;}
+.coupon-box button { background: var(--dk); color: var(--wh); border: none; padding: 0 20px; border-radius: 10px; font-family: 'Tajawal'; font-weight: 700; cursor: pointer; transition: 0.3s; }
+.coupon-box button:hover { background: var(--ol); }
+.discount-msg { font-size: 13px; color: #d35400; font-weight: 700; margin-top: 5px; display: none; }
+
+.summary-row { display: flex; justify-content: space-between; font-size: 16px; font-weight: 500; color: var(--tx); margin-bottom: 15px; }
+.summary-row.total { font-size: 22px; font-weight: 800; color: var(--ol); border-top: 1px solid var(--bd); padding-top: 20px; margin-top: 10px; }
+
+.submit-btn { width: 100%; background: linear-gradient(135deg, var(--ol), var(--dk2)); color: var(--wh); border: none; padding: 20px; border-radius: 15px; font-size: 18px; font-weight: 800; font-family: 'Tajawal', sans-serif; cursor: pointer; box-shadow: 0 8px 24px rgba(107,124,74,.25); transition: 0.3s; margin-top: 20px; }
+.submit-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(107,124,74,.35); }
+
+@media (max-width: 900px) { .checkout-wrapper { grid-template-columns: 1fr; } .summary-section { order: -1; } .form-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="brand">متجر ريتال</a>
+  <a href="index.html" class="back-link">العودة للمتجر ↩</a>
+</header>
+
+<div class="checkout-wrapper">
+  <div class="form-section">
+    <h2 class="section-title">
+      بيانات الشحن والتوصيل
+      <span id="userGreeting" class="user-greeting">أهلاً بعودتك!</span>
+    </h2>
+    <form id="orderForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label>الاسم الكامل *</label>
+          <input type="text" id="fullName" required placeholder="مثال: سارة محمد">
+        </div>
+        <div class="form-group">
+          <label>رقم الجوال *</label>
+          <input type="tel" id="phone" required placeholder="05XXXXXXXX" pattern="[0-9]{10}">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>المدينة *</label>
+          <input type="text" id="city" required placeholder="الرياض">
+        </div>
+        <div class="form-group">
+          <label>الحي *</label>
+          <input type="text" id="district" required placeholder="الياسمين">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full">
+          <label>العنوان التفصيلي *</label>
+          <textarea id="address" rows="2" required placeholder="اسم الشارع، رقم المنزل..."></textarea>
+        </div>
+      </div>
+      
+      <div class="account-check" id="accountCheckContainer">
+        <input type="checkbox" id="saveAccount">
+        <label for="saveAccount">حفظ بياناتي لتسهيل الطلب في المرات القادمة</label>
+      </div>
+
+      <button type="submit" class="submit-btn">تأكيد الطلب ✨</button>
+    </form>
+  </div>
+
+  <div class="summary-section">
+    <h2 class="section-title">سلة المشتريات</h2>
+    <div class="product-item">
+      <img src="photo_2026-03-12_02-18-30 (2).jpg" alt="كريم ريتال" class="product-img">
+      <div class="product-details">
+        <h4>كريم الجسم الفاخر</h4>
+        <p id="itemPriceDisplay">30 ر.س</p>
+        <div style="margin-top:8px; display:flex; align-items:center; gap:10px;">
+          <label style="font-size:13px; color:var(--tx); font-weight:700;">الكمية:</label>
+          <select id="qtySelect" onchange="updateTotal()" style="padding:5px 10px; border-radius:8px; border:1px solid var(--bd); font-family:'Tajawal'; outline:none;">
+            <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label style="font-size: 13px; font-weight: 700; color: var(--tx); display: block; margin-bottom: 5px;">هل لديك كود خصم؟</label>
+      <div class="coupon-box">
+        <input type="text" id="couponInput" placeholder="أدخل الكود هنا">
+        <button type="button" onclick="applyCoupon()">تطبيق</button>
+      </div>
+      <div id="discountMsg" class="discount-msg">تم تطبيق خصم X% بنجاح!</div>
+    </div>
+
+    <div class="summary-row"><span>المجموع الفرعي</span><span id="subTotal">30 ر.س</span></div>
+    <div class="summary-row"><span>الشحن</span><span style="color:var(--ol); font-weight:700;">مجاني</span></div>
+    <div class="summary-row" id="discountRow" style="display: none; color: #d35400;">
+      <span>الخصم</span><span id="discountValue">-0 ر.س</span>
+    </div>
+    <div class="summary-row total"><span>الإجمالي المطلوب</span><span id="finalTotal">30 ر.س</span></div>
+  </div>
+</div>
+
+<script>
+let basePrice = parseInt(localStorage.getItem('rital_base_price')) || 30;
+let discountPercent = 0;
+let appliedCouponCode = "";
+
+window.onload = function() {
+  document.getElementById('itemPriceDisplay').innerText = basePrice + ' ر.س';
+  updateTotal();
+
+  const savedUser = JSON.parse(localStorage.getItem('rital_customer_account'));
+  if (savedUser) {
+    document.getElementById('fullName').value = savedUser.name;
+    document.getElementById('phone').value = savedUser.phone;
+    document.getElementById('city').value = savedUser.city;
+    document.getElementById('district').value = savedUser.district;
+    document.getElementById('address').value = savedUser.address;
+    
+    document.getElementById('userGreeting').style.display = 'block';
+    document.getElementById('userGreeting').innerText = `أهلاً بعودتك، ${savedUser.name.split(' ')[0]}!`;
+    document.getElementById('accountCheckContainer').style.display = 'none';
+  }
+};
+
+function applyCoupon() {
+  const code = document.getElementById('couponInput').value.trim().toUpperCase();
+  const msgElement = document.getElementById('discountMsg');
+  if(!code) return;
+
+  let coupons = JSON.parse(localStorage.getItem('rital_coupons')) || [];
+  let validCoupon = coupons.find(c => c.code === code);
+
+  if(validCoupon) {
+    discountPercent = validCoupon.percent;
+    appliedCouponCode = code;
+    msgElement.style.display = 'block';
+    msgElement.style.color = '#25d366';
+    msgElement.innerText = `تم تطبيق خصم ${discountPercent}% بنجاح!`;
+    updateTotal();
+  } else {
+    discountPercent = 0;
+    appliedCouponCode = "";
+    msgElement.style.display = 'block';
+    msgElement.style.color = '#e05050';
+    msgElement.innerText = 'الكود غير صحيح أو منتهي الصلاحية';
+    updateTotal();
+  }
+}
+
+function updateTotal() {
+  const qty = parseInt(document.getElementById('qtySelect').value);
+  const subTotal = qty * basePrice;
+  const discountAmount = subTotal * (discountPercent / 100);
+  const finalTotal = subTotal - discountAmount;
+
+  document.getElementById('subTotal').innerText = subTotal + ' ر.س';
+  
+  if(discountAmount > 0) {
+    document.getElementById('discountRow').style.display = 'flex';
+    document.getElementById('discountValue').innerText = '-' + discountAmount + ' ر.س';
+  } else {
+    document.getElementById('discountRow').style.display = 'none';
+  }
+
+  document.getElementById('finalTotal').innerText = finalTotal + ' ر.س';
+}
+
+document.getElementById('orderForm').addEventListener('submit', function(e) {
+  e.preventDefault(); 
+  
+  const customer = {
+    name: document.getElementById('fullName').value,
+    phone: document.getElementById('phone').value,
+    city: document.getElementById('city').value,
+    district: document.getElementById('district').value,
+    address: document.getElementById('address').value
+  };
+  
+  if(document.getElementById('saveAccount') && document.getElementById('saveAccount').checked) {
+    localStorage.setItem('rital_customer_account', JSON.stringify(customer));
+  }
+
+  const qty = parseInt(document.getElementById('qtySelect').value);
+  const subTotal = qty * basePrice;
+  const discountAmount = subTotal * (discountPercent / 100);
+  const finalTotal = subTotal - discountAmount;
+  
+  const orderId = 'ORD-' + Math.floor(1000 + Math.random() * 9000); 
+
+  let dNote = "";
+  if(discountPercent > 0) { dNote = `كود ${appliedCouponCode} (خصم ${discountPercent}%)`; }
+
+  const newOrder = {
+    id: orderId,
+    customerName: customer.name,
+    customerPhone: customer.phone,
+    fullAddress: customer.city + '، حي ' + customer.district + '، ' + customer.address,
+    qty: qty,
+    total: finalTotal,
+    discountNote: dNote,
+    status: 'new',
+    date: new Date().toLocaleString('ar-SA') 
+  };
+
+  let orders = JSON.parse(localStorage.getItem('rital_orders')) || [];
+  orders.unshift(newOrder); 
+  localStorage.setItem('rital_orders', JSON.stringify(orders));
+
+  alert('تم تسجيل طلبك بنجاح! سيقوم فريقنا بالتواصل معك قريباً.\nرقم طلبك هو: ' + orderId);
+  window.location.href = 'index.html';
+});
+</script>
+</body>
+</html>
